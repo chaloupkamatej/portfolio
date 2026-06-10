@@ -276,103 +276,233 @@ const translations = {
     } 
 };
 
-const langButtons = document.querySelectorAll(".lang-btn");
-const translatableNodes = document.querySelectorAll("[data-i18n]");
-const detailButtons = document.querySelectorAll(".project-toggle");
-const revealItems = document.querySelectorAll(".reveal");
+document.addEventListener("DOMContentLoaded", () => {
+  const langButtons = document.querySelectorAll(".lang-btn");
+  const translatableNodes = document.querySelectorAll("[data-i18n]");
+  const detailButtons = document.querySelectorAll(".project-toggle");
+  const revealItems = document.querySelectorAll(".reveal");
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav a");
+  const menuToggle = document.getElementById("menuToggle");
+  const nav = document.getElementById("mainNav");
 
-function setLanguage(lang) {
-  translatableNodes.forEach(node => {
-    const key = node.getAttribute("data-i18n");
-    if (translations[lang] && translations[lang][key]) {
-      node.textContent = translations[lang][key];
+  const SCROLL_OFFSET = 110;
+
+  // -----------------------------
+  // Helpers
+  // -----------------------------
+  function getHideDetailText(lang) {
+    if (translations?.[lang]?.hideDetailBtn) {
+      return translations[lang].hideDetailBtn;
     }
+    return lang === "cs" ? "Skrýt detail" : "Hide details";
+  }
+
+  function closeMobileMenu() {
+    if (!nav || !menuToggle) return;
+
+    nav.classList.remove("open");
+    menuToggle.classList.remove("active");
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
+
+  function openMobileMenu() {
+    if (!nav || !menuToggle) return;
+
+    nav.classList.add("open");
+    menuToggle.classList.add("active");
+    menuToggle.setAttribute("aria-expanded", "true");
+  }
+
+  function updateDetailButtonsText(lang) {
+    detailButtons.forEach((btn) => {
+      const detail = btn.nextElementSibling;
+      if (!detail) return;
+
+      const isOpen = detail.classList.contains("open");
+      btn.textContent = isOpen
+        ? getHideDetailText(lang)
+        : (translations?.[lang]?.detailBtn || "Detail");
+    });
+  }
+
+  // -----------------------------
+  // Language switch
+  // -----------------------------
+  function setLanguage(lang) {
+    translatableNodes.forEach((node) => {
+      const key = node.getAttribute("data-i18n");
+      node.textContent =
+        translations?.[lang]?.[key] ??
+        translations?.cs?.[key] ??
+        "";
+    });
+
+    document.documentElement.lang = lang === "cs" ? "cs" : "en";
+    localStorage.setItem("portfolio-lang", lang);
+
+    langButtons.forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+
+    updateDetailButtonsText(lang);
+  }
+
+  langButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setLanguage(btn.dataset.lang);
+    });
   });
 
-  document.documentElement.lang = lang === "cs" ? "cs" : "en";
-  localStorage.setItem("portfolio-lang", lang);
+  // -----------------------------
+  // Smooth scroll for anchors
+  // -----------------------------
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href");
 
-  langButtons.forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.lang === lang);
-  });
-}
+      if (!targetId || targetId === "#") return;
 
-langButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    setLanguage(btn.dataset.lang);
-  });
-});
+      const target = document.querySelector(targetId);
+      if (!target) return;
 
-detailButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const detail = btn.nextElementSibling;
-    const isVisible = detail.style.display === "block";
-    detail.style.display = isVisible ? "none" : "block";
+      e.preventDefault();
 
-    const currentLang = localStorage.getItem("portfolio-lang") || "cs";
-    btn.textContent = isVisible
-      ? translations[currentLang].detailBtn
-      : (currentLang === "cs" ? "Skrýt detail" : "Hide details");
-  });
-});
+      const top = target.offsetTop - SCROLL_OFFSET;
 
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
+      window.scrollTo({
+        top,
+        behavior: "smooth",
+      });
+
+      // pokud je to link v mobilním menu, zavři menu
+      if (nav && nav.contains(this)) {
+        closeMobileMenu();
       }
     });
-  },
-  { threshold: 0.12 }
-);
+  });
 
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav a");
+  // -----------------------------
+  // Project details toggle
+  // -----------------------------
+  detailButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const detail = btn.nextElementSibling;
+      if (!detail) return;
 
+      detail.classList.toggle("open");
 
-window.addEventListener("scroll", () => {
-  let current = "";
+      const currentLang = localStorage.getItem("portfolio-lang") || "cs";
+      const isOpen = detail.classList.contains("open");
 
-  document.querySelectorAll("section").forEach(section => {
-    const rect = section.getBoundingClientRect();
+      btn.textContent = isOpen
+        ? getHideDetailText(currentLang)
+        : (translations?.[currentLang]?.detailBtn || "Detail");
+    });
+  });
 
-    if (rect.top <= 200 && rect.bottom >= 200) {
-      current = section.id;
+  // -----------------------------
+  // Reveal animations
+  // -----------------------------
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  revealItems.forEach((item) => observer.observe(item));
+
+  // -----------------------------
+  // Active nav highlighting
+  // -----------------------------
+  function updateActiveNav() {
+    if (!sections.length || !navLinks.length) return;
+
+    const offset = 120;
+    let currentId = "";
+    let closestDistance = Infinity;
+
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+
+      // sekce musí být aspoň trochu vidět
+      const isVisible =
+        rect.bottom > offset && rect.top < window.innerHeight * 0.8;
+
+      if (isVisible) {
+        const distance = Math.abs(rect.top - offset);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          currentId = section.id;
+        }
+      }
+    });
+
+    // pokud jsme skoro úplně dole, zvýrazni poslední sekci
+    const nearBottom =
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 4;
+
+    if (nearBottom && sections.length) {
+      currentId = sections[sections.length - 1].id;
     }
-  });
 
-  document.querySelectorAll(".nav a").forEach(a => {
-    a.classList.remove("active");
-    if (a.getAttribute("href") === "#" + current) {
-      a.classList.add("active");
-    }
-  });
-});
-
-const menuToggle = document.getElementById("menuToggle");
-const nav = document.getElementById("mainNav");
-
-document.querySelectorAll(".nav a").forEach(link => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("open");
-  });
-});
-
-document.addEventListener("click", (e) => {
-  if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-    nav.classList.remove("open");
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === `#${currentId}`) {
+        link.classList.add("active");
+      }
+    });
   }
+
+  window.addEventListener("scroll", updateActiveNav);
+  window.addEventListener("resize", updateActiveNav);
+
+  // -----------------------------
+  // Mobile menu toggle
+  // -----------------------------
+  if (menuToggle && nav) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = nav.classList.contains("open");
+
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    // klik mimo menu => zavřít
+    document.addEventListener("click", (e) => {
+      if (
+        nav.classList.contains("open") &&
+        !nav.contains(e.target) &&
+        !menuToggle.contains(e.target)
+      ) {
+        closeMobileMenu();
+      }
+    });
+
+    // Esc => zavřít
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeMobileMenu();
+      }
+    });
+  }
+
+  // -----------------------------
+  // Init
+  // -----------------------------
+  const savedLang = localStorage.getItem("portfolio-lang") || "cs";
+  setLanguage(savedLang);
+  updateActiveNav();
 });
-
-menuToggle.addEventListener("click", () => {
-  nav.classList.toggle("open");
-  menuToggle.classList.toggle("active");
-  menuToggle.setAttribute("aria-expanded", isOpen);
-});
-
-
-revealItems.forEach(item => observer.observe(item));
-
-const savedLang = localStorage.getItem("portfolio-lang") || "cs";
-setLanguage(savedLang);
+``
