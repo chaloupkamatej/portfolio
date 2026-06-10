@@ -207,7 +207,7 @@ main {
 }
 
 .hero {
-  min-height: calc(100vh - var(--header-h) - 10px);
+  min-height: calc(100vh - var(--header-h) - 20px);
   display: flex;
   align-items: center;
 }
@@ -319,7 +319,7 @@ main {
 }
 
 .section {
-  scroll-margin-top: calc(var(--header-h) + 20px);
+  scroll-margin-top: calc(var(--header-h) + 28px);
   display: flex;
   flex-direction: column;
   gap: 26px;
@@ -535,6 +535,11 @@ main {
 .project-detail p + p {
   margin-top: 10px;
 }
+
+.project-detail.open {
+  display: block;
+}
+
 
 .tech-grid {
   display: grid;
