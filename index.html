@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matěj Chaloupka | Developer Portfolio</title>
+  <meta
+    name="description"
+    content="Portfolio Matěje Chaloupky – ERP Developer se zaměřením na PHP, MSSQL, JavaScript a interní nástroje."
+  />
+  <meta property="og:title" content="Matěj Chaloupka | Developer Portfolio" />
+  <meta
+    property="og:description"
+    content="ERP Developer se zaměřením na PHP, MSSQL, JavaScript a interní nástroje."
+  />
+  <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#hero" class="brand" aria-label="Domů">
+        <span class="brand-mark">MCh</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Otevřít menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav" id="mainNav" aria-label="Hlavní navigace">
+        <a href="#about" data-i18n="navAbout"></a>
+        <a href="#experience" data-i18n="navExperience"></a>
+        <a href="#projects" data-i18n="navProjects"></a>
+        <a href="#tech" data-i18n="navTech"></a>
+        <a href="#contact" data-i18n="navContact"></a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="lang-btn active" type="button" data-lang="cs">CZ</button>
+        <button class="lang-btn" type="button" data-lang="en">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero container reveal">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="heroEyebrow"></p>
+        <h1 data-i18n="heroTitle"></h1>
+        <p class="hero-text" data-i18n="heroSubtitle">
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary" data-i18n="heroProjects"></a>
+          <a href="#contact" class="btn btn-secondary" data-i18n="heroContact"></a>
+        </div>
+
+        <div class="hero-points">
+          <div class="point-card">
+            <div class="point-bar"></div>
+            <p data-i18n="heroPoint1"></p>
+          </div>
+          <div class="point-card">
+            <div class="point-bar"></div>
+            <p data-i18n="heroPoint2"></p>
+          </div>
+          <div class="point-card">
+            <div class="point-bar"></div>
+            <p data-i18n="heroPoint3"></p>
+          </div>
+          <div class="point-card">
+            <div class="point-bar"></div>
+            <p data-i18n="heroPoint4"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section container reveal">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="aboutKicker"></span>
+        <h2 data-i18n="aboutTitle"></h2>
+      </div>
+
+      <div class="glass content-card">
+        <p data-i18n="aboutText1">
+        </p>
+        <p data-i18n="aboutText2">
+        </p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section container reveal">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="experienceKicker"></span>
+        <h2 data-i18n="experienceTitle"></h2>
+        <p class="section-subtitle" data-i18n="experienceSubtitle">
+        </p>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item glass">
+          <div class="timeline-meta">
+            <span class="timeline-badge" data-i18n="exp1Badge"></span>
+            <span class="timeline-date" data-i18n="exp1Date"></span>
+          </div>
+          <h3 data-i18n="exp1Title"></h3>
+          <p class="timeline-role" data-i18n="exp1Where" style="font-weight: bold;">
+          </p>
+          <p class="timeline-role" data-i18n="exp1Desc">
+          </p>
+          <ul class="timeline-list">
+            <li data-i18n="exp1Item1"></li>
+            <li data-i18n="exp1Item2"></li>
+            <li data-i18n="exp1Item3"></li>
+            <li data-i18n="exp1Item4"></li>
+            <li data-i18n="exp1Item5"></li>
+            <li data-i18n="exp1Item6"></li>
+          </ul>
+        </article>
+
+        <article class="timeline-item glass">
+          <div class="timeline-meta">
+            <span class="timeline-badge timeline-badge-muted" data-i18n="exp2Badge"></span>
+            <span class="timeline-date" data-i18n="exp2Date"></span>
+          </div>
+          <h3 data-i18n="exp2Title"></h3>
+          <p class="timeline-role" data-i18n="exp2Where" style="font-weight: bold;">
+          </p>
+          <p class="timeline-role" data-i18n="exp2Desc">
+          </p>
+          <ul class="timeline-list">
+            <li data-i18n="exp2Item1"></li>
+            <li data-i18n="exp2Item2"></li>
+            <li data-i18n="exp2Item3"></li>
+            <li data-i18n="exp2Item4"></li>
+            <li data-i18n="exp2Item5"></li>
+            <li data-i18n="exp2Item6"></li>
+          </ul>
+        </article>
+
+        <article class="timeline-item glass">
+          <div class="timeline-meta">
+            <span class="timeline-badge timeline-badge-muted" data-i18n="exp3Badge"></span>
+            <span class="timeline-date" data-i18n="exp3Date"></span>
+          </div>
+          <h3 data-i18n="exp3Title"></h3>
+          <p class="timeline-role" data-i18n="exp3Where" style="font-weight: bold;">
+          </p>
+          <p class="timeline-role" data-i18n="exp3Desc">
+          </p>
+          <ul class="timeline-list">
+            <li data-i18n="exp3Item1"></li>
+            <li data-i18n="exp3Item2"></li>
+            <li data-i18n="exp3Item3"></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section container reveal">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="projectsKicker"></span>
+        <h2 data-i18n="projectsTitle"></h2>
+        <p class="section-subtitle" data-i18n="projectsSubtitle">
+        </p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card glass">
+          <div class="card-top">
+            <span class="tag" data-i18n="project1Tag"></span>
+          </div>
+          <h3 data-i18n="project1Title"></h3>
+          <p class="project-summary" data-i18n="project1Summary">
+          </p>
+          <ul class="chip-list">
+            <li>MSSQL</li>
+            <li>Stored Procedures</li>
+            <li>Indexing</li>
+          </ul>
+          <button class="btn btn-small btn-secondary project-toggle" type="button" data-i18n="detailBtn"></button>
+          <div class="project-detail">
+            <p><strong data-i18n="project1ProblemLabel"></strong> <span data-i18n="project1Problem"></span></p>
+            <p><strong data-i18n="project1SolutionLabel"></strong> <span data-i18n="project1Solution"></span></p>
+            <p><strong data-i18n="project1ResultLabel"></strong> <span data-i18n="project1Result"></span></p>
+          </div>
+        </article>
+
+        <article class="project-card glass">
+          <div class="card-top">
+            <span class="tag" data-i18n="project2Tag"></span>
+          </div>
+          <h3 data-i18n="project2Title"></h3>
+          <p class="project-summary" data-i18n="project2Summary">
+          </p>
+          <ul class="chip-list">
+            <li>PHP</li>
+            <li>JavaScript</li>
+            <li>MySQL</li>
+          </ul>
+          <button class="btn btn-small btn-secondary project-toggle" type="button" data-i18n="detailBtn"></button>
+          <div class="project-detail">
+            <p><strong data-i18n="project2FeaturesLabel"></strong> <span data-i18n="project2Features"></span></p>
+            <p><strong data-i18n="project2BenefitLabel"></strong> <span data-i18n="project2Benefit"></span></p>
+          </div>
+        </article>
+
+        <article class="project-card glass">
+          <div class="card-top">
+            <span class="tag" data-i18n="project3Tag"></span>
+          </div>
+          <h3 data-i18n="project3Title"></h3>
+          <p class="project-summary" data-i18n="project3Summary">
+          </p>
+          <ul class="chip-list">
+            <li>PHP</li>
+            <li>MSSQL</li>
+            <li>REST API</li>
+          </ul>
+          <button class="btn btn-small btn-secondary project-toggle" type="button" data-i18n="detailBtn"></button>
+          <div class="project-detail">
+            <p><strong data-i18n="project3GoalLabel"></strong> <span data-i18n="project3Goal"></span></p>
+            <p><strong data-i18n="project3ApproachLabel"></strong> <span data-i18n="project3Approach"></span></p>
+            <p><strong data-i18n="project3OutcomeLabel"></strong> <span data-i18n="project3Outcome"></span></p>
+          </div>
+        </article>
+
+        <article class="project-card glass">
+          <div class="card-top">
+            <span class="tag" data-i18n="project4Tag"></span>
+          </div>
+          <h3 data-i18n="project4Title"></h3>
+          <p class="project-summary" data-i18n="project4Summary">
+          </p>
+          <ul class="chip-list">
+            <li>Kotlin</li>
+            <li>AndroidStudio</li>
+            <li>OneDrive</li>
+          </ul>
+          <button class="btn btn-small btn-secondary project-toggle" type="button" data-i18n="detailBtn"></button>
+          <div class="project-detail">
+            <p><strong data-i18n="project4FeaturesLabel"></strong> <span data-i18n="project4Features"></span></p>
+            <p><strong data-i18n="project4BenefitLabel"></strong> <span data-i18n="project4Benefit"></span></p>
+          </div>
+        </article>
+
+        <article class="project-card glass">
+          <div class="card-top">
+            <span class="tag" data-i18n="project5Tag"></span>
+          </div>
+          <h3 data-i18n="project5Title"></h3>
+          <p class="project-summary" data-i18n="project5Summary">
+          </p>
+          <ul class="chip-list">
+            <li>PHP</li>
+            <li>CSS</li>
+            <li>SQL</li>
+          </ul>
+          <button class="btn btn-small btn-secondary project-toggle" type="button" data-i18n="detailBtn"></button>
+          <div class="project-detail">
+            <p><strong data-i18n="project5GoalLabel"></strong> <span data-i18n="project5Goal"></span></p>
+            <p><strong data-i18n="project5ApproachLabel"></strong> <span data-i18n="project5Approach"></span></p>
+            <p><strong data-i18n="project5OutcomeLabel"></strong> <span data-i18n="project5Outcome"></span></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- TECH -->
+    <section id="tech" class="section container reveal">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="techKicker"></span>
+        <h2 data-i18n="techTitle"></h2>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card glass">
+          <h3>Backend</h3>
+          <div class="chip-list chip-list-static">
+            <span>PHP</span>
+            <span>MSSQL</span>
+            <span>REST API</span>
+          </div>
+        </article>
+
+        <article class="tech-card glass">
+          <h3>Frontend</h3>
+          <div class="chip-list chip-list-static">
+            <span>JavaScript</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>UX / UI</span>
+          </div>
+        </article>
+
+        <article class="tech-card glass">
+          <h3 data-i18n="techApproachTitle"></h3>
+          <div class="chip-list chip-list-static">
+            <span data-i18n="techApproach1"></span>
+            <span data-i18n="techApproach2"></span>
+            <span data-i18n="techApproach3"></span>
+            <span data-i18n="techApproach4"></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section container reveal">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="contactKicker"></span>
+        <h2 data-i18n="contactTitle"></h2>
+      </div>
+
+      <div class="contact-grid">
+        <article class="contact-card glass">
+          <h3 data-i18n="contactCardTitle"></h3>
+          <p data-i18n="contactCardText">
+          </p>
+
+          <div class="contact-list">
+
+            <a href="mailto:chaloupkamatej@email.cz" class="contact-link">
+                <span class="contact-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path fill="currentColor"
+                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 
+                        1.1.9 2 2 2h16c1.1 0 2-.9 
+                        2-2V6c0-1.1-.9-2-2-2zm0 
+                        4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                </span>
+                <span class="contact-text"> chaloupkamatej@email.cz</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/mat%C4%9Bj-chaloupka-353ba0285/"
+                target="_blank"
+                class="contact-link">
+                <span class="contact-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path fill="currentColor"
+                    d="M19 3A2 2 0 0 1 21 5v14a2 
+                        2 0 0 1-2 2H5a2 2 0 0 1-2-2V5
+                        a2 2 0 0 1 2-2h14zM8.34 
+                        17V10.5H5.67V17h2.67zM7 
+                        9.25c.85 0 1.38-.56 1.38-1.25
+                        -.02-.71-.53-1.25-1.36-1.25
+                        -.83 0-1.38.54-1.38 1.25
+                        0 .69.53 1.25 1.34 1.25zm10 
+                        7.75v-3.5c0-1.87-1-2.74-2.34
+                        -2.74-1.08 0-1.56.6-1.83 
+                        1.02v-0.88H10.16c.04.58 
+                        0 6.1 0 6.1h2.67v-3.41
+                        c0-.18.01-.36.07-.49
+                        .14-.36.45-.73.98-.73
+                        .69 0 .97.54.97 
+                        1.33V17H17z"/>
+                </svg>
+                </span>
+                <span class="contact-text"> linkedin.com/in/matej-chaloupka</span>
+            </a>
+
+          </div>
+        </article>
+
+        <article class="contact-card glass">
+          <h3 data-i18n="cvTitle"></h3>
+          <p data-i18n="cvText">
+          </p>
+
+          <div class="cv-buttons">
+            <a
+              class="btn btn-primary"
+              href="assets/cv/CV_MCH_CZ.pdf"
+              download
+              data-i18n="cvCz"
+            >
+            </a>
+            <a
+              class="btn btn-secondary"
+              href="assets/cv/CV_MCH_EN.pdf"
+              download
+              data-i18n="cvEn"
+            >
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p><span data-i18n="footerText"></span></p>
+        <a href="#hero" class="back-to-top">
+        <span class="arrow-icon">
+            <svg viewBox="0 0 24 24" width="50" height="50">
+            <path fill="currentColor"
+                d="M12 5l-7 7h4v7h6v-7h4z"/>
+            </svg>
+        </span>
+        </a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
